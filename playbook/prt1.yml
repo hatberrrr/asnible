@@ -1,0 +1,12 @@
+---
+- name: asds
+  hosts: t1
+  gather_facts: no
+  sudo: true
+  vars:
+    user_name: ansible
+  tasks:
+  - name: Remove source.list
+    file:
+      path: /etc/apt/sources.list
+      state: absent

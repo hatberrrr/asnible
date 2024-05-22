@@ -1,0 +1,27 @@
+---
+- name: REPOS
+  hosts: t1
+  gather_facts: no
+  sudo: true
+  vars:
+    user_name: ansible
+  tasks:
+  - name: Remove sources.list
+    file:
+      path: /etc/apt/sources.list
+      state: absent
+#  - name: Create clean sources.list
+#    file:
+#      path: /etc/apt/sources.list
+#      state: touch
+#      mode: u=rw,g=r,o=r
+  - name: "Add repos"
+    lineinfile:
+      path: /etc/apt/sources.list 
+      line: "{{item}}" 
+      create: yes
+    with_items:
+      - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-main/     1.7_x86-64 main contrib non-free"
+      - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-update/   1.7_x86-64 main contrib non-free"
+      - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-base/     1.7_x86-64 main contrib non-free"
+      - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free"

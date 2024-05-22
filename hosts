@@ -1,6 +1,8 @@
 [ls]
 test ansible_host=192.168.0.25
 serv ansible_host=192.168.0.199
+[test1]
+t1 ansible_host=192.168.0.202
 [ls:vars]
 ansible_user=ansible
 ansible_port=22
