@@ -10,12 +10,46 @@
     path: /etc/apt/sources.list.d/postgrespro-std-16.list
   register: stat_result
 
-- name: SHell scrip to apply repo
+- name: SHell scrip to apply repo if not exists
   shell: /opt/pgpro-repo-add.sh
   when: not stat_result.stat.exists 
   notify: Update apt
 
-- name: Install pgpro
+- name: Install pgpro and psycopg2
   apt:
-    name: postgrespro-std-16  
+    name: "{{pack_pg}}"  
     state: present
+
+- name: Check service status
+  service:
+    name: postgrespro-std-16
+    state: started
+    
+- name: ADD postgres to sudoers
+  lineinfile:
+    path: /etc/sudoers
+    regexp: '^postgres ALL='
+    line: 'postgres ALL=(ALL) NOPASSWD: ALL'
+    state: present
+
+- name: Change pass for postgres user
+  become_user: postgres
+  shell: psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+
+- name: Change host in pg_hba.conf
+  lineinfile:
+    path: /var/lib/pgpro/std-16/data/pg_hba.conf
+    state: present
+    regexp: '^host\s+all\s+all\s+127\.0\.0\.1/32'
+    line: 'host	all		all		0.0.0.0/0		trust'
+    backrefs: yes
+    backup: yes
+
+- name: Change listen_addresses in postgresql.conf
+  lineinfile:
+    path: /var/lib/pgpro/std-16/data/postgresql.conf
+    state: present
+    regexp: '^#listen_addresses = '
+    line: listen_addresses = '*'
+    backup: yes
+    backrefs: yes

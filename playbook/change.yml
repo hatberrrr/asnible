@@ -1,0 +1,20 @@
+---
+- name: CHange specific line
+  gather_facts: no
+  hosts: t202
+  become: yes
+  tasks:
+    - lineinfile:
+        path: /var/lib/pgpro/std-16/data/pg_hba.conf
+        state: present
+        regexp: '^host\s+all\s+all\s+127\.0\.0\.1/32'
+        line: 'host	all		all		0.0.0.0/0		trust'
+        backrefs: yes
+        backup: yes
+    - lineinfile:
+        path: /var/lib/pgpro/std-16/data/postgresql.conf
+        state: present
+        regexp: '^#listen_addresses = '
+        line: listen_addresses = '*'
+        backup: yes
+        backrefs: yes
