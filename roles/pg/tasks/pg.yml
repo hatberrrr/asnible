@@ -1,30 +1,4 @@
----
-- name: Take repo file
-  get_url: 
-    url: http://repo.postgrespro.ru/std-16/keys/pgpro-repo-add.sh
-    dest: /opt/ 
-    mode: '777'
-
-- name: Check if repo exists
-  stat:
-    path: /etc/apt/sources.list.d/postgrespro-std-16.list
-  register: stat_result
-
-- name: SHell scrip to apply repo if not exists
-  shell: /opt/pgpro-repo-add.sh
-  when: not stat_result.stat.exists 
-  notify: Update apt
-
-- name: Install pgpro and psycopg2
-  apt:
-    name: "{{pack_pg}}"  
-    state: present
-
-- name: Check service status
-  service:
-    name: postgrespro-std-16
-    state: started
-    
+---   
 - name: ADD postgres to sudoers
   lineinfile:
     path: /etc/sudoers
@@ -34,7 +8,10 @@
 
 - name: Change pass for postgres user
   become_user: postgres
-  shell: psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+  postgresql_user:
+    login_unix_socket: /tmp
+    name: postgres
+    password: postgres
 
 - name: Change host in pg_hba.conf
   lineinfile:
@@ -53,3 +30,10 @@
     line: listen_addresses = '*'
     backup: yes
     backrefs: yes
+
+- name: Create database
+  become_user: postgres
+  postgresql_db: 
+    login_unix_socket: /tmp
+    name: asureo
+

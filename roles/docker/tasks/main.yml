@@ -1,0 +1,8 @@
+---
+# tasks for docker. 
+# dockerROOTdir - turn on if not enough space for image
+- include_tasks: "{{ item }}"
+  loop:
+    - prep.yml
+    - image.yml
+    - dockerROOTdir.yml

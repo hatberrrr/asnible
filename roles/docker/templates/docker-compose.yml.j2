@@ -1,0 +1,75 @@
+version: "3"
+services:
+  ZVK:
+    image: asureo_linux:B9SD4HF4_release
+    container_name: asureo
+    restart: always
+#    network_mode: "host"
+#    mac_address: 02:42:AC:11:00:02
+    ports:
+      - "8625:8625"
+      - "8825:8825"
+      - "9880:9880"
+    tty: true
+    volumes:
+      - ./Logs:/home/root/.wine/drive_c/server/Logs
+      - www:/home/root/.wine/drive_c/www
+      - ./Zvk.ini:/home/root/.wine/drive_c/server/Zvk.ini
+#      - ./ckzv.ini:/home/root/.wine/drive_c/server/Events/ckzv/ckzv.ini
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+#      - ./version.info:/home/root/.wine/drive_c/server/version.info
+      - ./zvkkey.lic:/home/root/.wine/drive_c/server/zvkkey.lic
+#      - /etc/krb5.keytab:/etc/krb5.keytab
+#      - /etc/krb5.conf:/etc/krb5.conf
+#    networks:
+#      zrp_network:
+  webserver:
+    image: nginx:alpine
+    restart: always
+    network_mode: "host"
+    container_name: webserver
+#    ports:
+#      - "80:80"
+#      - "443:443"
+    volumes:
+      - www:/etc/nginx/www/asu
+      - ./nginx-config/conf.d:/etc/nginx/conf.d
+      - ./Logs:/var/log/nginx
+#      - ./nginx-config/certs/mycert.key:/etc/nginx/ssl/mycert.key
+#    networks:
+#      zrp_network:
+
+
+#  db:
+#    image: postgres:12
+#    container_name: PostgreSQL
+#    environment:
+#    POSTGRES_USER: postgres
+#    POSTGRES_PASSWORD: postgres
+#    POSTGRES_DB: postgres
+#    volumes:
+#      - ./postgres-data/postgres:/var/lib/postgresql/data
+#    networks:
+#    zrp_network:
+#    ports:
+#      - "5432:5432"
+#  pgadmin4:
+#    image: dpage/pgadmin4
+#    container_name: PGAdmin4
+#    environment:
+#    PGADMIN_DEFAULT_EMAIL: admin123@yandex.ru
+#    PGADMIN_DEFAULT_PASSWORD: admin123
+#    volumes:
+#      - ./pgadmin-data:/var/lib/pgadmin
+#      - ./pgadmin-data:/pgadmin4/servers.json
+#    ports:
+#      - "8889:80"
+#    networks:
+#      zrp_network:
+
+
+volumes:
+  www:
+#networks:
+#  zrp_network:

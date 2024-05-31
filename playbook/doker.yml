@@ -1,0 +1,13 @@
+---
+- name: Check if image is already loaded
+  gather_facts: no
+  become: yes
+  hosts: t202
+  tasks: 
+    - docker_image:
+        name: asureo_linux
+        tag: B9SD4HF4_release
+        source: local
+      register: image_exists
+    - debug: 
+        msg: "{{ image_exists }}"

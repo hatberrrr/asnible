@@ -1,0 +1,7 @@
+---
+- name: SCP test
+  hosts: t202
+  tasks:
+  - copy: 
+      src: /opt/asureo/asd.txt
+      dest: /opt/tmp/

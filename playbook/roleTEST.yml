@@ -1,6 +1,6 @@
 ---
-- hosts: all
+- hosts: thyp
   gather_facts: no
   become: yes
   roles:
-    - pg
+    - base

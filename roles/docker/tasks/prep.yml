@@ -1,0 +1,27 @@
+---
+- name: copy conf files
+  template:
+    src: '{{ item.src }}'
+    dest: /opt/asureo/{{ item.path | regex_replace('.j2$', '') }}
+  with_filetree: ../templates/
+  become: yes
+  when: item.state == 'file'
+
+- name: Move def.conf for nginx
+  command: mv /opt/asureo/default.conf /opt/asureo/nginx-config/conf.d/default.conf
+
+- name: Create Logs dir
+  file:
+    path: /opt/asureo/Logs
+    state: directory
+
+- name: Check if image already on the remote host
+  stat:
+    path: /opt/asureo/asureo.tar
+  register: exist_file
+
+- name: Copy image to remote host
+  copy:
+    src: /opt/asureo/asureo.tar
+    dest: /opt/asureo
+  when: not exist_file.stat.exists

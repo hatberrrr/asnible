@@ -1,0 +1,11 @@
+---
+- name: Create database
+  hosts: t202
+  gather_facts: no
+  become: yes
+  become_user: postgres
+  tasks:
+    - postgresql_user:
+        login_unix_socket: /tmp
+        name: hat
+        password: asd1

@@ -1,0 +1,67 @@
+server {
+        listen 80;
+        listen [::]:80;
+
+		# listen 447 ssl;
+		# listen [::]:447 ssl;
+		
+		# server_name cluster;
+		
+		# ssl_certificate /etc/nginx/ssl/mycert.crt;
+		# ssl_certificate_key /etc/nginx/ssl/mycert.key;
+		# ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+		# ssl_ciphers HIGH:!aNULL:!MD5;
+		# ssl_session_cache shared:SSL:100m;
+		# ssl_session_timeout 60m;
+		# ssl_prefer_server_ciphers on;
+
+        root /etc/nginx/www;
+        index index.html index.htm;
+
+        server_name _;
+
+		server_name_in_redirect off;
+
+
+		location /asu/ {
+		# раскомментить alias, если nginx на хосте
+			#alias /etc/nginx/www/;
+			try_files $uri $uri =404;
+		}
+		
+		# AppServer config	
+		location ~ ^/asu/appsrv/proxy.dll/help/(.*)$ {
+			rewrite ^/asu/appsrv/proxy.dll/help/(.*)$ /appservice/help/$1;
+		}
+
+		location ~ ^/asu/appsrv/(proxy.dll/)?(.*)$ {
+			if ( $http_user_agent ~* 'RemObjects' ) {
+				rewrite ^/asu/appsrv/(proxy.dll/)?(.*)$ /appservice/$2;
+			}
+				rewrite ^/asu/appsrv/(proxy.dll/)?(.*)$ /appsite/$2;
+		}
+
+		location /appsite/ {
+			proxy_pass http://{{ ansible_host }}:9880/;
+			proxy_redirect		off;
+			proxy_set_header	Host			$http_host;
+			proxy_set_header	X-Real-IP		$remote_addr;
+			proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
+			proxy_set_header	X-Forwarded-Proto	$scheme;
+		}
+
+		location /appservice/ {
+			proxy_pass http://{{ ansible_host }}:8625/;
+			proxy_redirect		off;
+			proxy_set_header	Host			$http_host;
+			proxy_set_header	X-Real-IP		$remote_addr;
+			proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
+			proxy_set_header	X-Forwarded-Proto	$scheme;
+		}
+		# End of AppServer config
+
+		location / {
+			return 301 /asu/index.html;
+		}
+
+}

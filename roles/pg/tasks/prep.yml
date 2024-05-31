@@ -1,0 +1,26 @@
+---
+- name: Take repo file
+  get_url: 
+    url: http://repo.postgrespro.ru/std-16/keys/pgpro-repo-add.sh
+    dest: /opt/ 
+    mode: '777'
+
+- name: Check if repo exists
+  stat:
+    path: /etc/apt/sources.list.d/postgrespro-std-16.list
+  register: stat_result
+
+- name: SHell scrip to apply repo if not exists
+  shell: /opt/pgpro-repo-add.sh
+  when: not stat_result.stat.exists 
+  notify: Update apt
+
+- name: Install pgpro and psycopg2
+  apt:
+    name: "{{pack_pg}}"  
+    state: present
+
+- name: Check service status
+  service:
+    name: postgrespro-std-16
+    state: started

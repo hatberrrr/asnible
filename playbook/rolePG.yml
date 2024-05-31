@@ -1,6 +1,6 @@
 ---
-- hosts: t1
+- hosts: t153
   gather_facts: no
   become: yes
   roles:
-    - test
+    - pg

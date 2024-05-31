@@ -1,0 +1,22 @@
+---
+- name: Change docker home dir if not eough space
+  file:
+    path: "{{ item.path }}" 
+    mode: '0777'
+    state: "{{ item.state }}"
+  loop:
+    - { path: '/etc/docker/', state: 'directory' }
+    - { path: '/home/docker/', state: 'directory' }
+
+- name: Copy daemon.json from template for docker
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+
+- name: Reload Daemon
+  command: systemctl daemon-reload
+
+- name: Reload docker service
+  service:
+    name: docker
+    state: restarted

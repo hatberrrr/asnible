@@ -1,0 +1,27 @@
+---
+- name: Check if image is already loaded
+  shell: docker inspect  asureo_linux:B9SD4HF4_release
+  register: image_exists 
+  ignore_errors: yes
+
+- name: load images
+  community.docker.docker_image_load:
+    path: /opt/asureo/asureo.tar
+  when: image_exists.stdout == "[]"
+
+- name: create container
+  community.docker.docker_compose:
+    project_src: /opt/asureo/
+  register: output
+
+- name: Show output
+  debug:
+    var: output
+
+- name: Show existing containers
+  command: docker ps -a
+  register: docker_ps
+
+- name: Containers
+  debug:
+    msg: "{{ docker_ps }}"

@@ -1,2 +1,4 @@
 ---
-# handlers file for base
+- name: Update apt
+  apt:
+    update_cache: yes
