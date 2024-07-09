@@ -1,6 +1,6 @@
 ---
-- hosts: thyp
+- hosts: testasd 
   gather_facts: no
   become: yes
   roles:
-    - base
+    - metrolog

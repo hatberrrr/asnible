@@ -1,0 +1,7 @@
+---
+- include_tasks: "{{ item }}"
+  with_items:
+    - prep.yml
+    - image.yml
+    - container.yml
+# tasks file for metrolog

@@ -1,0 +1,22 @@
+---
+- name: asd
+  hosts: t202
+  gather_facts: no
+  become: yes
+  tasks:
+    - name: Check if image is already loaded
+      shell: docker inspect  asureo_linux:B9SD4HF4_release
+      register: exasur
+      ignore_errors: yes
+
+    - name: Check if image already on the remote host
+      stat:
+        path: /opt/asureo/asureo.tar
+      register: exist_asureo
+
+    - name: Copy image asureo to remote host
+      copy:
+        src: /opt/asureo/asureo.tar
+        dest: /opt/asureo
+      when: not exist_asureo.stat.exists and exasur.stdout == "[]"
+

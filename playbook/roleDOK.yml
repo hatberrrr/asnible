@@ -1,8 +1,7 @@
 ---
 - name: role of docker
-  hosts: t202
+  hosts: thyp
   become: yes
-  become_user: root
   gather_facts: no
   roles:
 #  - base

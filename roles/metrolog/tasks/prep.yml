@@ -1,0 +1,23 @@
+---
+- name: create dirs for metrolog
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '777'
+  with_items:
+    - /opt/metrolog1/
+    - /opt/metrolog1/nginx
+    - /opt/metrolog1/logs
+- name: copy confs for metrolog
+  template:
+    src: "{{ item.src }}"
+    dest: /opt/metrolog1/{{ item.path | regex_replace('.j2$', '') }}
+  with_filetree: ../templates/
+  become: yes
+  when: item.state == 'file'
+- name: move nginx confs
+  command: mv /opt/metrolog1/"{{ item }}" /opt/metrolog1/nginx/
+  with_items:
+    - conf.conf
+    - nginx.conf
+

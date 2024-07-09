@@ -1,0 +1,17 @@
+---
+- name: create container
+  community.docker.docker_compose:
+    project_src: /opt/metrolog1/
+  register: output
+
+- name: Show output
+  debug:
+    var: output
+
+- name: Show existing containers
+  command: docker ps -a
+  register: docker_ps
+
+- name: Containers
+  debug:
+    msg: "{{ docker_ps }}"

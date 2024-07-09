@@ -1,11 +1,11 @@
 ---
-- name: asds
-  hosts: serv
+- name: ls
+  hosts: ls
   gather_facts: no
   vars:
     user_name: ansible
   tasks:
    - apt:
-       name: wine
+       name: etcd
        state: latest
      become: yes

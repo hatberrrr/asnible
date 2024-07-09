@@ -37,3 +37,8 @@
     login_unix_socket: /tmp
     name: asureo
 
+- name: Restart service to apply confs
+  service:
+    name: postgrespro-std-16
+    state: restarted
+

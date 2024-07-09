@@ -1,11 +1,14 @@
 [ls]
-#test ansible_host=192.168.0.25
-serv ansible_host=192.168.0.199
+cl1 ansible_host=192.168.0.187
+cl2 ansible_host=192.168.0.188
+cl3 ansible_host=192.168.0.189
 [test1]
-thyp ansible_host=172.26.8.108
+thyp ansible_host=172.27.20.223
 t202 ansible_host=192.168.0.202
 [test2]
 t153 ansible_host=192.168.0.153
+[testasd]
+t199 ansible_host=192.168.0.199
 [all:vars]
 ansible_user=ansible
 ansible_port=22

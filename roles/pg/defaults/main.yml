@@ -2,4 +2,4 @@
 # defaults file for pg
 pack_pg:
 - postgrespro-std-16
-- python-psycopg2
+- python3-psycopg2

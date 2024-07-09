@@ -1,0 +1,210 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft": "Warning",
+            "Microsoft.Hosting.Lifetime": "Information"
+        }
+    },
+    "AllowedHosts": "*",
+    "IsPgProvider": true,
+    
+    
+    "LogoPicture": "",
+    "AsureoURL":"http://{{ asureo_host }}/asu/appsrv/proxy.dll/SOAP?service=ViolationBookHelper",
+    "synhronizeSecondsPeriod": "20",
+    "firstSynhronizeSecondsPeriod": "60",
+    "asureoPingSessionsInSeconds": "60",
+    "fullSynhronizationLimitHour": "24",
+    "AsureoDeviceTypes": "",
+    "AsureoPowerObjectTypes": "",
+    "CurrentEnterpriseKey": "",
+    "ClientSettingsProvider.ServiceUri": "",
+    "AsureoLogin": "",
+    "AsureoPassword": "",
+    "AsureoCloseTimeout" : 120,
+    "AsureoOpenTimeout" : 120,
+    "AsureoReceiveTimeout" : 120,
+    "AsureoSendTimeout": 120,
+    "RpCloseTimeout": 120,
+    "RpOpenTimeout": 120,
+    "RpReceiveTimeout": 120,
+    "RpSendTimeout": 120,
+    "SendMessageAttemptsCount": "0",
+    "SendMessageAttemptsInterval": "00:00:05",
+    "JournalCleanStart": "01:00",
+    "TransportJournalDepth": "0",
+    "ChangesJournalDepth": "0",
+    "JournalsArchivePath": "",
+    "EnableTransportJournalArchivation": "false",
+    "EnableChangesJournalArchivation": "false",
+    "EnableNotificationsArchivation": "false",
+    "MobilePhone": "mobile",
+    "TelephoneNumber": "TelephoneNumber",
+    "DocumentNumberPrefix": "33",
+    "FileReceivingRateDiffToLog": "10",
+    "TimeZoneIdent": "Russia Time Zone 3",
+    "AsureoCheckedEnterpriseAttrForDevices": "True",
+    "Version": "1.7.0.5710",
+    "TokenSessionTimeout": 120,
+    "AllowInsecureHttp": true,
+    "ClientSessionTimeout": "5",
+    "ClientSessionCheckPeriod": "1",
+    "EquipmentTreeChunksTimeout": "60",
+    "EquipmentTreeChunkSize": "20000",
+    "EnableBrowserLink": false,
+    "RPUrl": "http://{{ asureo_host }}/asu/appsrv/proxy.dll/SOAP?service=RPIntegrationService",
+    "RPClientUrl": "http://{{ asureo_host }}/asu/SMSITLoader/RPUserLoader.application",
+    "RPReloadIntervalInMinutes": "2",
+    "ServiceUsers": "sms",
+    "AsureoServiceUserLogin": "metrolog",
+    "AsureoServiceUserPassword": "PkMetrolog",
+    "MetrologDeviceType": "ЛЭП;ЭЛТ;РЗА;ТМиС;АСДУ;ЭНРГ;ЭЗ;Грозотросы;ВЛ-500;Транзит 110;Транзит 220;ВЛ-220;ВЛ-110;В;АТ;СШ;Реакторы и СК;ГТ;Блоки (генераторы, тр-ры);Генератор, системы возбуждения;Выпрямительные установки;Схемы ПГ;Системы ГП;РЗА ВЛ;РЗА ШР;РЗ АТ, Т, ВДТ, еакторов, генераторов;Устройства ПА;Регистраторы, устройства ОМП, осциллографы;РЗ СШ, ОШ, ыключателей;УРОВ, УРОЗ;УТМ;Канал связи;Канал передачи данных;Сервер ТМ;Преобразователи;ПАК;ГТО;К;ТГ;ГГ;ВО;Б;Корпус А;Корпус Б;ГГЭС;Гидросооружения;ХТ;АБП;РП;С;Е;ОО;С А Р;ГТУ;ПТУ;ЛВС;Серверы;АРЧМ;ОИК;СДТУ;УПАТС;СПИ;КС;Прочее;АПВ, АВР;УПАСК;РА;РЗА Р;УРОВ;РЗА СШ;Регистраторы;ПА;РЗА АТ, Т;РЗА ЛЭП;СКРМ;БСК;СК;Р;Прочее ЭЛТ;ТН;ТН 220 кВ;ТН 54 В;ТН 400 кВ;ТН 330 кВ;ТН 500 кВ;ТН 750 кВ;ТН 110 кВ;УПГ;ВУ;СШ 154 кВ;СШ 110 кВ;СШ 330 кВ;СШ 20 В;СШ 500 кВ;СШ 400 кВ;СШ 750 кВ;АТ,Т;АТ,Т 154 кВ;АТ,Т 110 кВ;АТ,Т 400 кВ;АТ,Т 330 кВ;АТ,Т 500 кВ;АТ,Т 220 кВ;АТ,Т 750 кВ;В 110 кВ;В 154 кВ;В 220 кВ;В 400 кВ;В 500 кВ;В 750 кВ;В 330 кВ;154 кВ;400 В;800 кВ;Транзиты;Транзиты 330 кВ;Транзиты 220 кВ;Транзиты 110 кВ;750 кВ;330 кВ;110 кВ;220 кВ;500 кВ;САР;АВРЧМ;ОПРЧ;ЛЭП 10 Кв;БК;БК 110 кВ;СК 15 кВ;ПРА;ГРАРМ;Состав ГА;НА;ЛЭП 800 кВ;СВ;РТ;РЗ;РЗ Р;РЗ АТ, Т;РАСП;СА;ПГУ;РШ;РШ 500 кВ;СС;СДТУ АРЧМ;РШ 220 кВ;СК 10 кВ;СДТУ ДЦ;СДТУ направления;Коммутаторы;Маршрутизаторы;Межсетевые экраны;РЗ ЛЭП;РЗ АТ, Т;РЗ СШ;ТИ;РЗА АТ, Т;НПРЧ;АБП;Конденсатопровод;Паропровод;Теплотрассы;АТ, Т4РЗА АТ,Т;ВЛ-35;РЗА ЛЭП;ТН 10 кВ;ТН 35 кВ;СШ 10 кВ;АТ,Т 10 кВ;АТ,Т 35 кВ;10 кВ;35 кВ;АСКУЭ;КЛ-35кВ;ИП;Коммутац.оборуд.;Оборудование ТМ;Сетевое оборуд.;Лин.оборуд.;ГА;ТА;КА;К№Б;К№А;Сервер БД;ЦСПА;Коммуникационный сервер;Релейный;Измерительный;БлТр;РК;ТТ;ТСН;Раз;Тр;СШ-330;СШ-750;СШ-500.;Транзит 330;ВЛ-30;ВЛ-750;Присоед.ВЛ;Ген;вводы ВЛ;ППТ;ОР;ЛР;ЛС;Об.ВЛ;ОЭНРГ;УММ;УПЗ;УПО;Град;СН;СТЗ;СТО;МП;ГП;КЦВ;ТЦВ;ЦН;ДТ;ВЭНРГ;РВП;ДВ;ДС;ПСГ;КОН;ПНД;ПВД;ПЭН;Электроустановка;ООО;Сервер;Прочее РЗА;РЗА АТ,Т;СШ 6 кВ;СШ 35 В;В 6 кВ;В 10 кВ;В 18 кВ;В 35 кВ;ЛЭП 110 кВ;ЛЭП 220 кВ;ЛЭП 500 кВ",
+    "UserName": "",
+    "CardToNotSignificantCheckInterval": "1140",
+    "CardToNotSignificantCheckStart": "23:59",
+    "IaEnterpriseKey": "ЦДУ",
+    "UseOnlyDomainLogin": "false",
+    "ShowEmergencyRepairStock": "false",
+    "documentCheckerDelayMin": "10",
+    "asureoSendingPackSize": "50",
+    "ShowChildEnterprisesForLocation": "false",
+    "CanEditContracts": "false",
+    "FundmetrologyProxyUri": "",
+    "SendCardChangeSetsTimeout": "1000",
+    "SendCardChangeSetsLimit": "100",
+    "SendEquipmentTreeChangedTimeout": "1000",
+    "SendEquipmentTreeChangedLimit": "100",
+    "extendedLogRepairLoading": "false",
+    "documentLockingPingInSeconds": "55",
+    "NTDomainAlias": "",
+    "RpMaxMessageSizeMb": "2000",
+    "AsureoMaxMessageSizeMb": "2000",
+    "httpConnectionTimeout": "5",
+    "AdditionalAuthLogger": "false",
+    "AsureoDataChunkSize": "4096",
+    "InstanceDescription": "",
+    "RpYearsToLoad": "3",
+    "ShowPreciousMetals": "false",
+    "IsPlanningEventsNative": "true",
+    "MigrateOnlyYearFromRP": "true",
+    "IgnoreRzaExportWarnings": "false",
+    "PlanningEventsNativeStatesToIncludeInCreate": "Exploitation",
+    "PlanningEventsNativeStatesToExcludeFromAdd": "WriteOff",
+
+    "IndicatorsRelayProtectionDataSourceEquipmentTypes": "АнМФУ;АнУРЗ;АнФРЗ;АнФСА",
+    "IndicatorsEmergencyControlDataSourceEquipmentTypes": "АнУПА;АнУПАСК;АнФПА;АнФУПАСК",
+
+"AvailabilityPanelProviderSettings": {
+
+    "RzEquipmentTypes": "АнУРЗ",
+
+    "SaEquipmentTypes": "АнУСА",
+
+    "PaEquipmentTypes": "АнУПА",
+
+    "RaEquipmentTypes": "АнУРА",
+
+    "RaspEquipmentTypes": "",
+
+    "TaEquipmentTypes": "АнУТА" 
+
+  },
+
+
+
+  "AvailabilityDeviceProviderSettings": {
+
+    "RzEquipmentTypes": "АнФРЗ",
+
+    "SaEquipmentTypes": "АнФСА",
+
+    "PaEquipmentTypes": "АнФПА",
+
+    "RaEquipmentTypes": "АнФРА",
+
+    "RaspEquipmentTypes": "",
+
+    "TaEquipmentTypes": "АнФТА" 
+
+  },
+    
+    "RegistrationGroupNameMappings": {
+        "РАС": "Регистрация аварийных событий",
+        "ТА": "Технологическая автоматика объекта электроэнергетики",
+        "ПА": "Противоаварийная автоматика",
+        "УПАСК": "Устройства передачи аварийных сигналов и команд",
+        "РЗ": "Релейная защита",
+        "СА": "Cетевая автоматика",
+        "ФА": "Функциональные автоматики",
+        "РА": "Режимная автоматика",
+        "СМПР": "Система мониторинга переходных режимов",
+        "ОМП": "Определение места повреждения"
+    },
+    "EventEditFieldDependencies": {
+        "RzaEvent": [
+            {
+                "FieldKey": "ElectricalFuseType",
+                "Value": "Нет КЗ",
+                "Allow": [
+                    {
+                        "FieldKey": "ElectricalFusePlace"
+                    },
+                    {
+                        "FieldKey": "ElectricalFuseCount"
+                    }
+                ]
+            },
+            {
+                "FieldKey": "ElectricalFuseType",
+                "Value": "",
+                "Allow": [
+                    {
+                        "FieldKey": "ElectricalFusePlace"
+                    },
+                    {
+                        "FieldKey": "ElectricalFuseCount"
+                    }
+                ]
+            }
+        ],
+        "CommonEvent": [
+
+        ]
+    },
+    "OldRzaVoltageIds": {
+        "0.4": "15",
+        "3.15": "21",
+        "6": "6",
+        "10": "7",
+        "13": "22",
+        "13.8": "18",
+        "15": "17",
+        "15.75": "19",
+        "24": "20",
+        "35": "8",
+        "110": "9",
+        "154": "10",
+        "220": "4",
+        "330": "11",
+        "400": "16",
+        "500": "5",
+        "750": "12",
+        "800": "13",
+        "1150": "14"
+    },
+
+    "Autofac": {
+        "RzaModule": "Sms.Rza.Server.RzaModule.dll",
+        "RgServerModule": "Sms.Analyze.Server.Rg.dll",
+        "MetrologAnalyzeIntegrationModule": "MetrologAnalyze.Integration.Module.dll",
+        "MetrologModule": "Metrolog.dll",
+        "MetrologMigrationModule": "Metrolog.Migrations.dll",
+        "RPIntegrationModule": "Metrolog.RPIntegration.dll",
+        "MetrologUtilitiesModule": "Sms.MetrologUtilities.Server.dll",
+	"PlanningEventsNativeModule": "Metrolog.PlanningEventsNative.dll",
+	"MetrologDatabaseModule": "Metrolog.Database.dll"
+
+    }
+}
+

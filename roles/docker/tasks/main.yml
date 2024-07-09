@@ -6,3 +6,4 @@
     - prep.yml
     - image.yml
     - dockerROOTdir.yml
+    - container.yml

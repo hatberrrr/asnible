@@ -1,27 +1,43 @@
 ---
 - name: Check if image is already loaded
   shell: docker inspect  asureo_linux:B9SD4HF4_release
-  register: image_exists 
+  register: exasur
   ignore_errors: yes
 
-- name: load images
+- name: Check if image already on the remote host
+  stat:
+    path: /opt/asureo/asureo.tar
+  register: exist_asureo
+
+- name: Copy image asureo to remote host
+  copy:
+    src: /opt/asureo/asureo.tar
+    dest: /opt/asureo
+  when: not exist_asureo.stat.exists and exasur.stdout == "[]"
+
+- name: Check if nginx:alpine alredy loaded
+  shell: docker inspect  nginx:alpine
+  register: exnginx
+  ignore_errors: yes
+
+- name: Check if image already on the remote host
+  stat:
+    path: /opt/asureo/nginx_alpine.tar
+  register: nginx
+
+- name: Copy image nginx to remote host
+  copy:
+    src: /opt/asureo/nginx_alpine.tar
+    dest: /opt/asureo
+  when: not nginx.stat.exists and exnginx.stdout == "[]"
+
+- name: load nginx alpine
+  community.docker.docker_image_load:
+    path: /opt/asureo/nginx_alpine.tar
+  when: exnginx.stdout == "[]"
+
+- name: load asureo
   community.docker.docker_image_load:
     path: /opt/asureo/asureo.tar
-  when: image_exists.stdout == "[]"
+  when: exasur.stdout == "[]"
 
-- name: create container
-  community.docker.docker_compose:
-    project_src: /opt/asureo/
-  register: output
-
-- name: Show output
-  debug:
-    var: output
-
-- name: Show existing containers
-  command: docker ps -a
-  register: docker_ps
-
-- name: Containers
-  debug:
-    msg: "{{ docker_ps }}"

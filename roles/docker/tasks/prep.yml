@@ -15,13 +15,3 @@
     path: /opt/asureo/Logs
     state: directory
 
-- name: Check if image already on the remote host
-  stat:
-    path: /opt/asureo/asureo.tar
-  register: exist_file
-
-- name: Copy image to remote host
-  copy:
-    src: /opt/asureo/asureo.tar
-    dest: /opt/asureo
-  when: not exist_file.stat.exists

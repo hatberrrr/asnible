@@ -1,0 +1,23 @@
+---
+- name: Check if image is already loaded
+  shell: docker inspect 10.3.29.38:5000/metrolog/metrolog-hydro-rg-23:latest
+  register: exmetr
+  ignore_errors: yes
+
+- name: Check if image already on the remote host
+  stat:
+    path: /opt/metrolog/images_metroliz_5710.tar
+  register: exist_metrolog
+
+- name: Copy image metrolog to remote host
+  copy:
+    src: /opt/asureo/images_metroliz_5710.tar
+    dest: /opt/metrolog1
+  when: not exist_metrolog.stat.exists and exmetr.stdout == "[]"
+
+- name: load metrolog
+  community.docker.docker_image_load:
+    path: /opt/metrolog1/images_metroliz_5710.tar
+  when: exmetr.stdout == "[]"
+
+

@@ -1,0 +1,8 @@
+---
+asureo_host: "{{ansible_host}}"  # change if ASUREO on different host Ex: asureo_host: 192.168.0.1
+pg_host: 192.168.0.193
+pg_host_port: 5434
+pg_base: metrlin
+pg_user: postgres
+pg_pass: asd1
+

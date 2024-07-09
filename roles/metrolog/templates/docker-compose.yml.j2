@@ -1,0 +1,39 @@
+version: '3'
+services:
+    
+    metrolog:
+        image: 10.3.29.38:5000/metrolog/metrolog-hydro-rg-23:latest
+        restart: always
+        environment:
+            - HOST_IP_ADDRESS={{ ansible_host }}
+            - METROLOG_NGINX_PORT=94
+        volumes:
+            - ./appsettings.json:/var/www/metrolog/web/appsettings.json
+            - ./connectionStrings.json:/var/www/metrolog/web/connectionStrings.json
+            - ./logs:/var/www/metrolog/web/logs
+            #- ./WebServer.runtimeconfig.json:/var/www/metrolog/web/WebServer.runtimeconfig.json
+            #- ./metrolog.sh:/var/metrolog.sh
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
+        container_name: Metrolog
+        ports:
+            - 8094:95
+        networks:
+            metrolog_network:
+            
+    nginx:
+        image: nginx:alpine
+        restart: always
+        container_name: Nginx
+        ports: 
+            - 94:94
+        volumes:
+            - ./nginx/conf.conf:/etc/nginx/conf.d/conf.conf
+            - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+        depends_on:
+            - metrolog
+        networks:
+            metrolog_network:       
+
+networks:
+ metrolog_network:
