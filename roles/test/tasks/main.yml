@@ -1,3 +1,35 @@
 ---
-# tasks file for test
-- include_tasks: prt2.yml
+- name: infra prep | install python
+  raw: test -e /usr/bin/python3 || (apt update -y && apt install -y python3)
+
+- name: infra prep | Remove sources.list
+  file:
+    path: "{{ path_to_source_list }}"
+    state: absent
+
+- name: infra prep | Add repos
+  lineinfile:
+    path: "{{ path_to_source_list }}"
+    line: "{{ item }}"
+    create: yes
+  with_items:
+    - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-main/     1.7_x86-64 main contrib non-free"
+    - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-update/   1.7_x86-64 main contrib non-free"
+    - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-base/     1.7_x86-64 main contrib non-free"
+    - "deb http://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 main contrib non-free"
+    - "deb https://dl.astralinux.ru/astra/stable/1.7_x86-64/repository-extended/ 1.7_x86-64 astra-ce"
+  notify: Update apt
+
+- name: infra prep | Install docker and compose
+  apt:
+    name: "{{ docker_compose_packs }}"
+
+- name: infra prep | Make dir for asureo
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+    recurse: yes
+  with_items:
+    - /opt/asureo
+    - /opt/asureo/nginx-config/conf.d/

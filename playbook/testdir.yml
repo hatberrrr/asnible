@@ -1,0 +1,15 @@
+---
+- name: ASD
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: infra prep | Make dir for asureo
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0777'
+        recurse: yes
+      with_items:
+        - /opt/asureo
+        - /opt/asureo/nginx-config/conf.d/
